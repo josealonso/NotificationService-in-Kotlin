@@ -1,4 +1,4 @@
-package com.josealonso.notificationsapp.consumer
+package com.josealonso.notificationsapp.service.consumer
 
 import com.josealonso.notificationsapp.utilities.GROUP_ID
 import com.josealonso.notificationsapp.utilities.TOPIC_NAME

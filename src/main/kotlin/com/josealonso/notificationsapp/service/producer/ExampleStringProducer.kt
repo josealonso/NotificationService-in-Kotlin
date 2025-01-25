@@ -1,4 +1,4 @@
-package com.josealonso.notificationsapp.producer
+package com.josealonso.notificationsapp.service.producer
 
 import com.josealonso.notificationsapp.utilities.TOPIC_NAME
 import org.springframework.kafka.core.KafkaTemplate
