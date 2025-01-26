@@ -40,3 +40,20 @@ Fields: orderId, status, notificationType.
 - Email data object
 Fields: userData, orderData, orderStatus.
 
+## Testing the basic Kafka endpoint
+
+```bash
+curl --location --request POST 'localhost:8080/api/v1/test' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "message": "SomeMessage"
+}'
+```
+
+Response:
+
+```
+Message received: [SomeMessage]
+Message received: [ExampleDto(someMessage=SomeMessage)]
+Message received: [UserDto(id=26, name=SomeMessage)]
+```

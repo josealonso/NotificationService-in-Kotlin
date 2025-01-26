@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class NotificationsappApplication
+class NotificationsExampleApplication
 
 fun main(args: Array<String>) {
-	runApplication<NotificationsappApplication>(*args)
+	runApplication<NotificationsExampleApplication>(*args)
 }
