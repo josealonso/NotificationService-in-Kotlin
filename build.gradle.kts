@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
 	kotlin("jvm") version "1.9.25"
 	kotlin("plugin.spring") version "1.9.25"
@@ -27,6 +29,7 @@ subprojects {
 	apply(plugin = "org.jetbrains.kotlin.plugin.spring")
 	apply(plugin = "org.springframework.boot")
 	apply(plugin = "io.spring.dependency-management")
+	apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
 
     dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -36,6 +39,8 @@ subprojects {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+//		implementation("org.jetbrains.kotlin:stdlib-jdk8")
+//		implementation("org.jetbrains.kotlin:kotlin-gradle-noarg")  // Not needed in Gradle
 	implementation("org.springframework.kafka:spring-kafka")
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("io.micrometer:micrometer-registry-prometheus")
@@ -45,11 +50,21 @@ subprojects {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-kotlin {
-	compilerOptions {
-		freeCompilerArgs.addAll("-Xjsr305=strict")
+	tasks.withType<KotlinCompile> {
+		kotlinOptions {
+			freeCompilerArgs = listOf("-Xjsr305=strict")
+			jvmTarget = "17"
+		}
 	}
-}
+
+    kotlin {
+	    compilerOptions {
+		    freeCompilerArgs.addAll("-Xjsr305=strict")
+	    }
+		jvmToolchain {
+			languageVersion.set(JavaLanguageVersion.of(17))
+		}
+    }
 
 allOpen {
 	annotation("jakarta.persistence.Entity")

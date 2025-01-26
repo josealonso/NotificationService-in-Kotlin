@@ -1,5 +1,7 @@
 plugins {
     kotlin("jvm")
+    kotlin("plugin.spring")
+    kotlin("plugin.jpa")
 }
 
 group = "com.josealonso"
@@ -10,6 +12,8 @@ repositories {
 }
 
 dependencies {
+    implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("reflect"))
     testImplementation(kotlin("test"))
 }
 
