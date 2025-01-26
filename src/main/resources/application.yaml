@@ -9,6 +9,9 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
         spring:
+          json:
+            trusted:
+              packages: "com.josealonso.notificationsapp.entities.dto"
           deserializer:
             value:
               delegate:
@@ -17,4 +20,3 @@ spring:
       bootstrap-servers: localhost:8098
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      
