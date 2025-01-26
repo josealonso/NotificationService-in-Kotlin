@@ -6,20 +6,29 @@ plugins {
 	kotlin("plugin.jpa") version "1.9.25"
 }
 
-group = "com.josealonso"
-version = "0.0.1-SNAPSHOT"
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+allprojects {
+//	java {
+//		toolchain {
+//			languageVersion = JavaLanguageVersion.of(17)
+//		}
+//	}
+
+	group = "com.josealonso"
+	version = "0.0.1-SNAPSHOT"
+
+	repositories {
+		mavenCentral()
 	}
 }
 
-repositories {
-	mavenCentral()
-}
+subprojects {
+	apply(plugin = "org.jetbrains.kotlin.jvm")
+	apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+	apply(plugin = "org.springframework.boot")
+	apply(plugin = "io.spring.dependency-management")
 
-dependencies {
+    dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-mail")
@@ -50,4 +59,6 @@ allOpen {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
 }
