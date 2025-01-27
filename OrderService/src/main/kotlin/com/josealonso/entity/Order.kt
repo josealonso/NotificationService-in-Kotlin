@@ -1,4 +1,4 @@
-package com.josealonso.entity
+package com.josealonso.com.josealonso.entity
 
 import jakarta.persistence.*
 import java.math.BigDecimal
@@ -21,7 +21,7 @@ class Order(
     val price: BigDecimal,
 
     @Enumerated(EnumType.STRING)
-    val status: OrderStatus = OrderStatus.PENDING,
+    var status: OrderStatus = OrderStatus.PENDING,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
