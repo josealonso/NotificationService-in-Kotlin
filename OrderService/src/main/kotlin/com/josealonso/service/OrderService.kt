@@ -1,55 +1,16 @@
 package com.josealonso.com.josealonso.service
 
-import com.josealonso.com.josealonso.repository.OrderRepository
 import com.josealonso.com.josealonso.entity.OrderDTO
 import com.josealonso.com.josealonso.entity.OrderStatus
-import com.josealonso.com.josealonso.extensions.copy
-import com.josealonso.com.josealonso.extensions.fromDTO
-import com.josealonso.com.josealonso.extensions.toDTO
-import org.springframework.stereotype.Service
-import org.springframework.data.repository.findByIdOrNull
 
-@Service
-class OrderService(private val orderRepository: OrderRepository) {
-
-    fun createOrder(orderDTO: OrderDTO): OrderDTO {
-        val order = orderDTO.fromDTO()
-        order.status = OrderStatus.PROCESSING
-        val savedOrder = orderRepository.save(order)
-        return savedOrder.toDTO()
-    }
-
-    fun getOrderById(id: Long): OrderDTO {
-        val order = orderRepository.findByIdOrNull(id) ?: throw OrderNotFoundException(id)
-        return order.toDTO()
-    }
-
-    fun getAllOrders(): List<OrderDTO> {
-        return orderRepository.findAll().map { it.toDTO() }
-    }
-
-    fun updateOrder(id: Long, orderDTO: OrderDTO): OrderDTO {
-        val existingOrder = orderRepository.findByIdOrNull(id) ?: throw OrderNotFoundException(id)
-        orderRepository.delete(existingOrder)
-        val updatedOrder = existingOrder.copy()
-        return orderRepository.save(updatedOrder).toDTO()
-    }
-
-    fun deleteOrder(id: Long) {
-        if (!orderRepository.existsById(id)) {
-            throw OrderNotFoundException(id)
-        }
-        orderRepository.deleteById(id)
-    }
-
-    fun updateOrderStatus(id: Long, status: OrderStatus): OrderDTO {
-        val order = orderRepository.findByIdOrNull(id) ?: throw OrderNotFoundException(id)
-        val updatedOrder = order.copy()
-        updatedOrder.status = status
-        return orderRepository.save(updatedOrder).toDTO()
-    }
-
+// interface OrderService(private val orderRepository: OrderRepository) {
+interface OrderService {
+    fun createOrder(orderDTO: OrderDTO): OrderDTO
+    fun getOrderById(id: Long): OrderDTO
+    fun getAllOrders(): List<OrderDTO>
+    fun updateOrder(id: Long, orderDTO: OrderDTO): OrderDTO
+    fun deleteOrder(id: Long)
+    fun updateOrderStatus(id: Long, status: OrderStatus): OrderDTO
 }
 
-class OrderNotFoundException(id: Long) : RuntimeException("Order not found with id: $id")
 

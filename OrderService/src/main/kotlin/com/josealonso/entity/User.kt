@@ -11,7 +11,7 @@ class User(
     val id: Long,
 
     @Column(name = "user_id" ,nullable = false)
-    val userId: String,
+    val userId: Long,
 
     @Column(nullable = false)
     val name: String,

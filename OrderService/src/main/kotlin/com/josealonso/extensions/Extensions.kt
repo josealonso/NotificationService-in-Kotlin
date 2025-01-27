@@ -6,16 +6,37 @@ import com.josealonso.com.josealonso.entity.User
 import com.josealonso.com.josealonso.entity.UserDTO
 import java.time.LocalDateTime
 
+fun User.toDTO() =
+    UserDTO(
+        userId = this.userId,
+        name = this.name,
+        email = this.email,
+        phoneNumber = this.phoneNumber,
+        orders = this.orders,
+    )
+
+fun UserDTO.fromDTO() =
+    User(
+        id = -1,
+        userId = this.userId,
+        name = this.name,
+        email = this.email,
+        phoneNumber = this.phoneNumber,
+        orders = this.orders,
+        createdAt = LocalDateTime.now(),
+        modifiedAt = LocalDateTime.now(),
+    )
+
 fun Order.toDTO() =
     OrderDTO(orderId = this.orderId,
         name = this.name,
         price = this.price,
         status = this.status,
-        userId = this.userId)
+        userId = this.userId.toDTO())
 
 fun Order.copy() =
     Order(
-        id = -1,
+        id = id,
         orderId = this.orderId,
         name = this.name,
         price = this.price,
@@ -32,28 +53,8 @@ fun OrderDTO.fromDTO() =
         name = this.name,
         price = this.price,
         status = this.status,
-        userId = this.userId,
+        userId = this.userId.fromDTO(),
         modifiedAt = LocalDateTime.now(),
         createdAt = LocalDateTime.now()
     )
 
-fun UserDTO.toDTO(user: User) =
-    UserDTO(
-        userId = user.userId,
-        name = user.name,
-        email = user.email,
-        phoneNumber = user.phoneNumber,
-        orders = user.orders,
-    )
-
-fun User.fromDTO(userDTO: UserDTO) =
-    User(
-        id = -1,
-        userId = userDTO.userId,
-        name = userDTO.name,
-        email = userDTO.email,
-        phoneNumber = userDTO.phoneNumber,
-        orders = userDTO.orders,
-        createdAt = LocalDateTime.now(),
-        modifiedAt = LocalDateTime.now(),
-    )
