@@ -68,7 +68,7 @@ class OrderControllerTest {
 
     @Test
     fun `getOrder should return order with OK status`() {
-        val orderId = 1L
+        val orderId = orderDTOExample.orderId
         val orderDTO = orderDTOExample
         every { orderService.getOrderById(orderId) } returns orderDTO
 
@@ -95,7 +95,7 @@ class OrderControllerTest {
 
     @Test
     fun `updateOrder should return updated order with OK status`() {
-        val orderId = 1L
+        val orderId = orderDTOExample.orderId
         val orderDTO = orderDTOExample
         every { orderService.updateOrder(orderId, orderDTO) } returns orderDTO
 
@@ -119,7 +119,7 @@ class OrderControllerTest {
 
     @Test
     fun `updateOrderStatus should return updated order with OK status`() {
-        val orderId = 1L
+        val orderId = orderDTOExample.orderId
         val newStatus = OrderStatus.COMPLETED
         val updatedOrderDTO = orderDTOExample.copy()
         updatedOrderDTO.status = newStatus

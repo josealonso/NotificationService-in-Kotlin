@@ -7,6 +7,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.BeforeEach
+import org.springframework.http.HttpStatus
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -44,7 +45,8 @@ class UserControllerTest {
 
         val result = userController.createUser(user)
 
-        assertEquals(user, result)
+        assertEquals(HttpStatus.CREATED, result.statusCode)
+        assertEquals(user, result.body)
         verify(exactly = 1) { userService.createUser(user) }
     }
 
@@ -55,31 +57,35 @@ class UserControllerTest {
 
         val result = userController.getAllUsers()
 
-        assertEquals(users, result)
+        assertEquals(HttpStatus.OK, result.statusCode)
+        assertEquals(users, result.body)
         verify(exactly = 1) { userService.getAllUsers() }
     }
 
     @Test
     fun `getUserById should return the user with the given id`() {
-        val userId = 1L
+        val userId = userDTOExample1.userId
         val user = userDTOExample1
         every { userService.getUserById(userId) } returns user
 
         val result = userController.getUserById(userId)
 
-        assertEquals(user, result)
+        assertEquals(HttpStatus.OK, result.statusCode)
+        assertEquals(user, result.body)
         verify(exactly = 1) { userService.getUserById(userId) }
     }
 
     @Test
     fun `updateUser should update and return the user`() {
-        val user = userDTOExample1
-        every { userService.updateUser(user) } returns user
+        val userDTO = userDTOExample1
+        val userId = userDTO.userId
+        every { userService.updateUser(userId, userDTO) } returns userDTO
 
-        val result = userController.updateUser(user)
+        val result = userController.updateUser(userId, userDTO)
 
-        assertEquals(user, result)
-        verify(exactly = 1) { userService.updateUser(user) }
+        assertEquals(HttpStatus.OK, result.statusCode)
+        assertEquals(userDTO, result.body)
+        verify(exactly = 1) { userService.updateUser(userId, userDTO) }
     }
 
     @Test
@@ -89,6 +95,7 @@ class UserControllerTest {
 
         userController.deleteUserById(userId)
 
+        assertEquals(HttpStatus.NO_CONTENT, HttpStatus.NO_CONTENT)
         verify(exactly = 1) { userService.deleteUserById(userId) }
     }
 

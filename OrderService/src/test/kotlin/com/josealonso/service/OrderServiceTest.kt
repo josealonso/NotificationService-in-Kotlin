@@ -64,7 +64,7 @@ class OrderServiceTest {
 
     @Test
     fun `getOrderById should return the order when it exists`() {
-        val orderId = 1L
+        val orderId = orderDTOExample.orderId
         val orderDTO = orderDTOExample
         // every { orderRepository.findById(orderId) } returns Optional.of(orderDTOExample.fromDTO())
         every { orderRepository.findByIdOrNull(orderId) } returns orderDTOExample.fromDTO()  // Both lines are equivalent
@@ -92,7 +92,7 @@ class OrderServiceTest {
 
         @Test
         fun `updateOrder should update and return the order`() {
-            val orderId = 1L
+            val orderId = orderDTOExample.orderId
             val updatedOrderDTO = orderDTOExample
             every { orderRepository.findByIdOrNull(orderId) } returns updatedOrderDTO.fromDTO()
             every { orderRepository.save(any()) } returns updatedOrderDTO.fromDTO()
@@ -106,19 +106,8 @@ class OrderServiceTest {
         }
 
         @Test
-        fun `deleteOrder should delete the order`() {
-            val orderId = 1L
-            every { orderRepository.existsById(orderId) } returns true
-            every { orderRepository.deleteById(orderId) } just Runs
-
-            orderService.deleteOrder(orderId)
-
-            verify(exactly = 1) { orderRepository.deleteById(orderId) }
-        }
-
-        @Test
         fun `updateOrderStatus should update and return the order with new status`() {
-            val orderId = 1L
+            val orderId = orderDTOExample.orderId
             val newStatus = OrderStatus.COMPLETED
             val updatedOrderDTO = orderDTOExample.copy()
             updatedOrderDTO.status = newStatus
@@ -134,4 +123,16 @@ class OrderServiceTest {
             verify(exactly = 1) { orderRepository.findByIdOrNull(orderId) }
             verify(exactly = 1) { orderRepository.save(any()) }
         }
+
+    @Test
+    fun `deleteOrder should delete the order`() {
+        val orderId = 1L
+        every { orderRepository.existsById(orderId) } returns true
+        every { orderRepository.deleteById(orderId) } just Runs
+
+        orderService.deleteOrder(orderId)
+
+        verify(exactly = 1) { orderRepository.deleteById(orderId) }
     }
+
+}

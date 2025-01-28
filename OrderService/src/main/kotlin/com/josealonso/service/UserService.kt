@@ -1,26 +1,45 @@
 package com.josealonso.com.josealonso.service
 
 import com.josealonso.com.josealonso.entity.UserDTO
+import com.josealonso.com.josealonso.exceptions.UserNotFoundException
+import com.josealonso.com.josealonso.extensions.copy
+import com.josealonso.com.josealonso.extensions.fromDTO
+import com.josealonso.com.josealonso.extensions.toDTO
+import com.josealonso.com.josealonso.repository.UserRepository
+import org.springframework.data.repository.findByIdOrNull
+import org.springframework.stereotype.Service
 
-class UserService {
+@Service
+class UserService(private val userRepository: UserRepository) {
+
     fun createUser(user: UserDTO): UserDTO {
-        TODO("Not yet implemented")
+        val newUser = user.fromDTO()
+        val savedUser = userRepository.save(newUser)
+        return savedUser.toDTO()
     }
 
     fun getUserById(userId: Long): UserDTO {
-        TODO("Not yet implemented")
+        val user = userRepository.findByIdOrNull(userId) ?: throw UserNotFoundException(userId)
+        return user.toDTO()
     }
 
     fun getAllUsers(): List<UserDTO> {
-        TODO("Not yet implemented")
+        return userRepository.findAll().map { it.toDTO() }
     }
 
     fun deleteUserById(userId: Long) {
-        TODO("Not yet implemented")
+        if (userRepository.existsById(userId)) {
+            userRepository.deleteById(userId)
+        }
+        else {
+            throw UserNotFoundException(userId)
+        }
     }
 
-    fun updateUser(user: UserDTO): UserDTO {
-        TODO("Not yet implemented")
+    fun updateUser(userId: Long, user: UserDTO): UserDTO {
+        val existingUser = userRepository.findByIdOrNull(userId) ?: throw UserNotFoundException(userId)
+        val updatedUser = existingUser.copy()
+        return userRepository.save(updatedUser).toDTO()
     }
 
 }

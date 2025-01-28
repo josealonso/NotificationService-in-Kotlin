@@ -5,5 +5,5 @@ data class UserDTO(
     val name: String,
     val email: String,
     val phoneNumber: String,
-    val orders: MutableList<Order> = mutableListOf(),
-    )
+    val orders: MutableList<Order> = mutableListOf()
+)

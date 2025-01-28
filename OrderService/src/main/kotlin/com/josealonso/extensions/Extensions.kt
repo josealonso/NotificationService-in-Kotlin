@@ -15,6 +15,18 @@ fun User.toDTO() =
         orders = this.orders,
     )
 
+fun User.copy() =
+    User(
+        id = this.id,
+        userId = this.userId,
+        name = this.name,
+        email = this.email,
+        phoneNumber = this.phoneNumber,
+        orders = this.orders,
+        createdAt = LocalDateTime.now(),
+        modifiedAt = LocalDateTime.now(),
+    )
+
 fun UserDTO.fromDTO() =
     User(
         id = -1,
