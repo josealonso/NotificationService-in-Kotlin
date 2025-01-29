@@ -1,7 +1,7 @@
-package com.josealonso.com.josealonso.controller
+package com.josealonso.controller
 
-import com.josealonso.com.josealonso.entity.UserDTO
-import com.josealonso.com.josealonso.service.UserService
+import com.josealonso.entity.UserDTO
+import com.josealonso.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping

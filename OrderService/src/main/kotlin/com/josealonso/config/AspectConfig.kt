@@ -1,4 +1,4 @@
-package com.josealonso.com.josealonso.config
+package com.josealonso.config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.EnableAspectJAutoProxy

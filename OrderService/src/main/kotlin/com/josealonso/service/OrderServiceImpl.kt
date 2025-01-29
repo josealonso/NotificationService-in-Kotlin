@@ -1,12 +1,12 @@
-package com.josealonso.com.josealonso.service
+package com.josealonso.service
 
-import com.josealonso.com.josealonso.repository.OrderRepository
-import com.josealonso.com.josealonso.entity.OrderDTO
-import com.josealonso.com.josealonso.entity.OrderStatus
-import com.josealonso.com.josealonso.exceptions.OrderNotFoundException
-import com.josealonso.com.josealonso.extensions.copy
-import com.josealonso.com.josealonso.extensions.fromDTO
-import com.josealonso.com.josealonso.extensions.toDTO
+import com.josealonso.entity.OrderDTO
+import com.josealonso.entity.OrderStatus
+import com.josealonso.exceptions.OrderNotFoundException
+import com.josealonso.extensions.copy
+import com.josealonso.extensions.fromDTO
+import com.josealonso.extensions.toDTO
+import com.josealonso.repository.OrderRepository
 import org.springframework.stereotype.Service
 import org.springframework.data.repository.findByIdOrNull
 

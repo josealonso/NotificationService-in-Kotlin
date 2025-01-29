@@ -1,9 +1,9 @@
-package com.josealonso.com.josealonso.extensions
+package com.josealonso.extensions
 
-import com.josealonso.com.josealonso.entity.Order
-import com.josealonso.com.josealonso.entity.OrderDTO
-import com.josealonso.com.josealonso.entity.User
-import com.josealonso.com.josealonso.entity.UserDTO
+import com.josealonso.entity.Order
+import com.josealonso.entity.OrderDTO
+import com.josealonso.entity.User
+import com.josealonso.entity.UserDTO
 import java.time.LocalDateTime
 
 fun User.toDTO() =

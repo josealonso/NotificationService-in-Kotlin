@@ -1,16 +1,15 @@
 package com.josealonso.endpoints
 
+import com.josealonso.controller.OrderController
+import com.josealonso.entity.OrderDTO
+import com.josealonso.entity.OrderStatus
+import com.josealonso.entity.UserDTO
+import com.josealonso.service.OrderServiceImpl
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.josealonso.com.josealonso.controller.OrderController
-import com.josealonso.com.josealonso.entity.OrderDTO
-import com.josealonso.com.josealonso.entity.OrderStatus
-import com.josealonso.com.josealonso.entity.UserDTO
-import com.josealonso.com.josealonso.service.OrderServiceImpl
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.bean.override.mockito.MockitoBean

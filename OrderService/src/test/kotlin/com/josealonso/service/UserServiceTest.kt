@@ -1,9 +1,9 @@
 package com.josealonso.service
 
-import com.josealonso.com.josealonso.entity.UserDTO
-import com.josealonso.com.josealonso.extensions.fromDTO
-import com.josealonso.com.josealonso.repository.UserRepository
-import com.josealonso.com.josealonso.service.UserService
+
+import com.josealonso.entity.UserDTO
+import com.josealonso.extensions.fromDTO
+import com.josealonso.repository.UserRepository
 import io.mockk.*
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.data.repository.findByIdOrNull

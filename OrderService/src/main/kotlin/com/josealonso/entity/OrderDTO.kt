@@ -1,4 +1,4 @@
-package com.josealonso.com.josealonso.entity
+package com.josealonso.entity
 
 import java.math.BigDecimal
 

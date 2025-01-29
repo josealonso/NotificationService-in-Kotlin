@@ -1,7 +1,7 @@
-package com.josealonso.com.josealonso.publisher
+package com.josealonso.publisher
 
-import com.josealonso.com.josealonso.entity.OrderDTO
-import com.josealonso.com.josealonso.entity.OrderStatus
+import com.josealonso.entity.OrderDTO
+import com.josealonso.entity.OrderStatus
 import org.aspectj.lang.annotation.AfterReturning
 import org.aspectj.lang.annotation.Aspect
 import org.springframework.stereotype.Component

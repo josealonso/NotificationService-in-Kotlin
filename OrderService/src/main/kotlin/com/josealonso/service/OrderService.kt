@@ -1,7 +1,7 @@
-package com.josealonso.com.josealonso.service
+package com.josealonso.service
 
-import com.josealonso.com.josealonso.entity.OrderDTO
-import com.josealonso.com.josealonso.entity.OrderStatus
+import com.josealonso.entity.OrderDTO
+import com.josealonso.entity.OrderStatus
 
 // interface OrderService(private val orderRepository: OrderRepository) {
 interface OrderService {

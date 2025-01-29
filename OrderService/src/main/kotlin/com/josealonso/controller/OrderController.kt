@@ -1,8 +1,8 @@
-package com.josealonso.com.josealonso.controller
+package com.josealonso.controller
 
-import com.josealonso.com.josealonso.entity.OrderDTO
-import com.josealonso.com.josealonso.entity.OrderStatus
-import com.josealonso.com.josealonso.service.OrderServiceImpl
+import com.josealonso.entity.OrderDTO
+import com.josealonso.entity.OrderStatus
+import com.josealonso.service.OrderServiceImpl
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

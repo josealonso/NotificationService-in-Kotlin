@@ -1,11 +1,11 @@
-package com.josealonso.com.josealonso.service
+package com.josealonso.service
 
-import com.josealonso.com.josealonso.entity.UserDTO
-import com.josealonso.com.josealonso.exceptions.UserNotFoundException
-import com.josealonso.com.josealonso.extensions.copy
-import com.josealonso.com.josealonso.extensions.fromDTO
-import com.josealonso.com.josealonso.extensions.toDTO
-import com.josealonso.com.josealonso.repository.UserRepository
+import com.josealonso.entity.UserDTO
+import com.josealonso.exceptions.UserNotFoundException
+import com.josealonso.extensions.copy
+import com.josealonso.extensions.fromDTO
+import com.josealonso.extensions.toDTO
+import com.josealonso.repository.UserRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 

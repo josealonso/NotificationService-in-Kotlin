@@ -1,11 +1,9 @@
 package com.josealonso.controller
 
-import com.josealonso.com.josealonso.controller.OrderController
-import com.josealonso.com.josealonso.entity.OrderDTO
-import com.josealonso.com.josealonso.entity.OrderStatus
-import com.josealonso.com.josealonso.entity.UserDTO
-import com.josealonso.com.josealonso.service.OrderServiceImpl
-
+import com.josealonso.entity.OrderDTO
+import com.josealonso.entity.OrderStatus
+import com.josealonso.entity.UserDTO
+import com.josealonso.service.OrderServiceImpl
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

@@ -1,8 +1,7 @@
 package com.josealonso.controller
 
-import com.josealonso.com.josealonso.controller.UserController
-import com.josealonso.com.josealonso.entity.UserDTO
-import com.josealonso.com.josealonso.service.UserService
+import com.josealonso.entity.UserDTO
+import com.josealonso.service.UserService
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

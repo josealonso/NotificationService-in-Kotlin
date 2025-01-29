@@ -1,6 +1,6 @@
-package com.josealonso.com.josealonso.publisher
+package com.josealonso.publisher
 
-import com.josealonso.com.josealonso.entity.OrderStatus
+import com.josealonso.entity.OrderStatus
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Component
 

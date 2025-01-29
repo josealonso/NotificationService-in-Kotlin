@@ -1,9 +1,9 @@
 package com.josealonso.endpoints
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.josealonso.com.josealonso.controller.UserController
-import com.josealonso.com.josealonso.entity.UserDTO
-import com.josealonso.com.josealonso.service.UserService
+import com.josealonso.controller.UserController
+import com.josealonso.entity.UserDTO
+import com.josealonso.service.UserService
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired

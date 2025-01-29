@@ -1,9 +1,11 @@
 package com.josealonso.service
 
-import com.josealonso.com.josealonso.entity.*
-import com.josealonso.com.josealonso.extensions.fromDTO
-import com.josealonso.com.josealonso.repository.OrderRepository
-import com.josealonso.com.josealonso.service.OrderServiceImpl
+
+import com.josealonso.entity.OrderDTO
+import com.josealonso.entity.OrderStatus
+import com.josealonso.entity.UserDTO
+import com.josealonso.extensions.fromDTO
+import com.josealonso.repository.OrderRepository
 import io.mockk.*
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.BeforeEach
