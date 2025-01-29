@@ -6,6 +6,8 @@ import com.josealonso.entity.OrderStatus
 import com.josealonso.entity.UserDTO
 import com.josealonso.service.OrderServiceImpl
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.josealonso.entity.NotificationType
+
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
@@ -42,8 +44,9 @@ class OrderControllerTest {
             name = "User 1",
             email = "alice@example.com",
             phoneNumber = "1234567890",
-            orders = mutableListOf(),
+            orders = mutableListOf()
         ),
+        notificationType = NotificationType.EMAIL
     )
 
     @Test

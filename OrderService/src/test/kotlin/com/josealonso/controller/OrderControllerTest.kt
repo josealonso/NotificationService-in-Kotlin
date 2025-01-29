@@ -1,5 +1,6 @@
 package com.josealonso.controller
 
+import com.josealonso.entity.NotificationType
 import com.josealonso.entity.OrderDTO
 import com.josealonso.entity.OrderStatus
 import com.josealonso.entity.UserDTO
@@ -23,6 +24,7 @@ class OrderControllerTest {
         name = "name",
         price = BigDecimal.ONE,
         status = OrderStatus.PENDING,
+        notificationType = NotificationType.EMAIL,
         userId = UserDTO(
             userId = 1,
             name = "user name",
@@ -37,6 +39,7 @@ class OrderControllerTest {
         name = "name2",
         price = BigDecimal(2),
         status = OrderStatus.PENDING,
+        notificationType = NotificationType.EMAIL,
         userId = UserDTO(
             userId = 2,
             name = "user2 name",

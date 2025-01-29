@@ -1,10 +1,12 @@
 package com.josealonso.service
 
 
+import com.josealonso.entity.NotificationType
 import com.josealonso.entity.OrderDTO
 import com.josealonso.entity.OrderStatus
 import com.josealonso.entity.UserDTO
 import com.josealonso.extensions.fromDTO
+
 import com.josealonso.repository.OrderRepository
 import io.mockk.*
 import kotlin.test.assertEquals
@@ -31,6 +33,7 @@ class OrderServiceTest {
             phoneNumber = "123456789",
             orders = mutableListOf(),
         ),
+        notificationType = NotificationType.EMAIL,
     )
 
     private val orderDTOExample2 = OrderDTO(
@@ -45,6 +48,7 @@ class OrderServiceTest {
             phoneNumber = "133456789",
             orders = mutableListOf(),
         ),
+        notificationType = NotificationType.EMAIL,
     )
 
     @BeforeEach

@@ -1,9 +1,6 @@
 package com.josealonso.extensions
 
-import com.josealonso.entity.Order
-import com.josealonso.entity.OrderDTO
-import com.josealonso.entity.User
-import com.josealonso.entity.UserDTO
+import com.josealonso.entity.*
 import java.time.LocalDateTime
 
 fun User.toDTO() =
@@ -40,11 +37,14 @@ fun UserDTO.fromDTO() =
     )
 
 fun Order.toDTO() =
-    OrderDTO(orderId = this.orderId,
+    OrderDTO(
+        orderId = this.orderId,
         name = this.name,
         price = this.price,
         status = this.status,
-        userId = this.userId.toDTO())
+        userId = this.userId.toDTO(),
+        notificationType = NotificationType.EMAIL
+    )
 
 fun Order.copy() =
     Order(
