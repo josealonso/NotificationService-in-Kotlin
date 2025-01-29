@@ -3,13 +3,13 @@ package com.josealonso.extensions
 import com.josealonso.entity.*
 import java.time.LocalDateTime
 
-fun User.toDTO() =
+fun User.toDTO(): UserDTO =
     UserDTO(
         userId = this.userId,
         name = this.name,
         email = this.email,
         phoneNumber = this.phoneNumber,
-        orders = this.orders,
+        orders = this.orders.map { it.toDTO() }.toMutableList(),
     )
 
 fun User.copy() =
@@ -24,19 +24,19 @@ fun User.copy() =
         modifiedAt = LocalDateTime.now(),
     )
 
-fun UserDTO.fromDTO() =
+fun UserDTO.fromDTO(): User =
     User(
         id = -1,
         userId = this.userId,
         name = this.name,
         email = this.email,
         phoneNumber = this.phoneNumber,
-        orders = this.orders,
+        orders = this.orders.map { it.fromDTO() }.toMutableList(),
         createdAt = LocalDateTime.now(),
         modifiedAt = LocalDateTime.now(),
     )
 
-fun Order.toDTO() =
+fun Order.toDTO(): OrderDTO =
     OrderDTO(
         orderId = this.orderId,
         name = this.name,
@@ -58,7 +58,7 @@ fun Order.copy() =
         createdAt = LocalDateTime.now()
     )
 
-fun OrderDTO.fromDTO() =
+fun OrderDTO.fromDTO(): Order =
     Order(
         id = -1,
         orderId = this.orderId,
