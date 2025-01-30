@@ -1,12 +1,9 @@
 package com.josealonso.sending.service
 
-import com.josealonso.entity.OrderDTO
+import com.josealonso.consumer.entity.OrderDTO
 import jakarta.mail.*
-import jakarta.mail.internet.InternetAddress
-import jakarta.mail.internet.MimeMessage
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
-import java.util.Properties
 
 @Component
 class PhoneService(order: OrderDTO): SendService {
@@ -23,15 +20,13 @@ class PhoneService(order: OrderDTO): SendService {
                        Your order number ${order.orderId} has been ${order.status}.    
                """.trimIndent()
 
-    override fun sendMessage(message: String, sender: String) {
+    override fun sendMessage(messageData: MessageData, sender: String) {
         val session = configurePhoneSession()
 
         try {
-            ; // TODO: Send SMS
-            }
-
-            // Transport.send(emailContent)
+            // TODO: Send SMS
             LOGGER.info("SMS message sent successfully to $recipient")
+
         } catch (e: MessagingException) {
             e.printStackTrace()
         }

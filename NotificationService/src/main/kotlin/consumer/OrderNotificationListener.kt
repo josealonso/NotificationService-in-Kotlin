@@ -1,5 +1,6 @@
 package com.josealonso.consumer
 
+import com.josealonso.consumer.entity.NotificationType
 import com.josealonso.consumer.entity.OrderDTO
 import com.josealonso.exceptions.UnknownOrderException
 import com.josealonso.sending.service.EmailService
@@ -22,15 +23,14 @@ class KafkaConsumer {
         LOGGER.info("   AAAAAAA ===== Received message: $consumerRecord")
         val payload = consumerRecord.value()
         val orderDTO = payload.copy()
-        // add a field to the payload
-        val notificationType = NotificationType.EMAIL
+
         when (orderDTO.notificationType) {
             NotificationType.EMAIL -> EmailService(orderDTO).sendMessage(
                 prepareData(orderDTO), "no-reply@amazon.com")
             NotificationType.SMS -> PhoneService(orderDTO).sendMessage(
                 prepareData(orderDTO), "1233334444"
             )
-            else -> throw UnknownOrderException(OrderNotification)
+            else -> throw UnknownOrderException(orderDTO)
         }
     }
 
@@ -47,20 +47,4 @@ class KafkaConsumer {
         return MessageData(recipient, emailSubject, emailBody)
     }
 
-}
-
-// Shared between microservices
-data class OrderNotification(
-    val orderId: Long,
-    val status: OrderStatus,
-    val notificationType: NotificationType
-)
-
-enum class NotificationType {
-    SMS,
-    EMAIL
-}
-
-enum class OrderStatus {
-    PENDING, PROCESSED, COMPLETED, CANCELLED
 }

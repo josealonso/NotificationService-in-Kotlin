@@ -1,6 +1,7 @@
 
-import com.josealonso.consumer.KafkaConsumer
-import com.josealonso.consumer.OrderStatus
+
+import com.josealonso.consumer.entity.NotificationType
+import com.josealonso.consumer.entity.OrderStatus
 import com.josealonso.consumer.entity.OrderDTO
 import com.josealonso.consumer.entity.UserDTO
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,7 +17,6 @@ import org.apache.kafka.common.serialization.StringDeserializer
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance
-import org.junit.jupiter.api.assertDoesNotThrow
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory
 import org.springframework.kafka.core.DefaultKafkaProducerFactory
 import org.springframework.kafka.support.serializer.JsonDeserializer
@@ -56,7 +56,8 @@ internal class EmbeddedKafkaIntegrationTest {
             email = "jose@example.com",
             phoneNumber = "243343444",
             orders = mutableListOf(),
-        )
+        ),
+        notificationType = NotificationType.EMAIL
     )
 
     @BeforeAll
@@ -115,23 +116,3 @@ internal class EmbeddedKafkaIntegrationTest {
         consumer.close()
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,6 @@
 package com.josealonso.sending.service
 
-import com.josealonso.entity.OrderDTO
+import com.josealonso.consumer.entity.OrderDTO
 import jakarta.mail.*
 import jakarta.mail.internet.InternetAddress
 import jakarta.mail.internet.MimeMessage
