@@ -19,7 +19,7 @@ class KafkaConsumer {
 
     @KafkaListener(topics = ["order-notifications"])
     fun receive(consumerRecord: ConsumerRecord<String, OrderDTO>) {
-        LOGGER.info("   AAAAAAA ===== Received message: ${consumerRecord.toString()}")
+        LOGGER.info("   AAAAAAA ===== Received message: $consumerRecord")
         val payload = consumerRecord.value()
         val orderDTO = payload.copy()
         // add a field to the payload
@@ -28,7 +28,7 @@ class KafkaConsumer {
             NotificationType.EMAIL -> EmailService(orderDTO).sendMessage(
                 prepareData(orderDTO), "no-reply@amazon.com")
             NotificationType.SMS -> PhoneService(orderDTO).sendMessage(
-                prepareData(orderDTO), "123333444"
+                prepareData(orderDTO), "1233334444"
             )
             else -> throw UnknownOrderException(OrderNotification)
         }
