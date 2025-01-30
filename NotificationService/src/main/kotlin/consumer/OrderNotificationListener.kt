@@ -1,6 +1,10 @@
 package com.josealonso.consumer
 
+import com.josealonso.consumer.entity.OrderDTO
 import com.josealonso.exceptions.UnknownOrderException
+import com.josealonso.sending.service.EmailService
+import com.josealonso.sending.service.MessageData
+import com.josealonso.sending.service.PhoneService
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -14,37 +18,33 @@ class KafkaConsumer {
     private val LOGGER: Logger = LoggerFactory.getLogger(KafkaConsumer::class.java)
 
     @KafkaListener(topics = ["order-notifications"])
-    fun receive(consumerRecord: ConsumerRecord<String, OrderNotification>) {
+    fun receive(consumerRecord: ConsumerRecord<String, OrderDTO>) {
         LOGGER.info("   AAAAAAA ===== Received message: ${consumerRecord.toString()}")
         val payload = consumerRecord.value()
-        val orderStatus = payload.status
-        when (payload.status) {
-            OrderStatus.PENDING -> handleOrderCreated(payload)
-            OrderStatus.PROCESSING -> handleOrderUpdated(payload)
-            OrderStatus.CANCELLED -> handleOrderCancelled(payload)
-            OrderStatus.COMPLETED -> handleOrderCompleted(payload)
-            else -> throw UnknownOrderException(payload)
+        val orderDTO = payload.copy()
+        // add a field to the payload
+        val notificationType = NotificationType.EMAIL
+        when (orderDTO.notificationType) {
+            NotificationType.EMAIL -> EmailService(orderDTO).sendMessage(
+                prepareData(orderDTO), "no-reply@amazon.com")
+            NotificationType.SMS -> PhoneService(orderDTO).sendMessage(
+                prepareData(orderDTO), "123333444"
+            )
+            else -> throw UnknownOrderException(OrderNotification)
         }
     }
 
-    private fun handleOrderCreated(notification: OrderNotification) {
-        LOGGER.info("===== AAAAAAAAAA - Received creation Order Notification: $notification()")
-        // Logic for handling new order creation, e.g., sending confirmation email
-    }
+    fun prepareData(order: OrderDTO): MessageData {
+        val customerName = order.userId.name
+        val recipient = order.userId.email
+        val emailSubject = "Your Amazon order has been ${order.status}"
 
-    private fun handleOrderUpdated(notification: OrderNotification) {
-        LOGGER.info("===== AAAAAAAAAA - Received update Order Notification: $notification()")
-        // Logic for handling order updates, e.g., sending status update notification
-    }
-
-    private fun handleOrderCancelled(notification: OrderNotification) {
-        LOGGER.info("===== AAAAAAAAAA - Received cancel Order Notification: $notification()")
-        // Logic for handling cancelled orders, e.g., sending cancellation confirmation
-    }
-
-    private fun handleOrderCompleted(notification: OrderNotification) {
-        LOGGER.info("===== AAAAAAAAAA - Received complete Order Notification: $notification()")
-        // Logic for handling completed orders, e.g., sending completion notification
+        val emailBody = """
+                       Dear $customerName,
+                       <br> 
+                       Your order number ${order.orderId} has been ${order.status}.    
+               """.trimIndent()
+        return MessageData(recipient, emailSubject, emailBody)
     }
 
 }
@@ -62,5 +62,5 @@ enum class NotificationType {
 }
 
 enum class OrderStatus {
-    PENDING, PROCESSING, COMPLETED, CANCELLED
+    PENDING, PROCESSED, COMPLETED, CANCELLED
 }
