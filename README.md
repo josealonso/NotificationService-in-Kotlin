@@ -1,6 +1,6 @@
 # Notification Service written in Kotlin and using Spring Boot 3.x
 
-This is a simple service to send notifications to users via email.
+This is a simple service to send notifications to users via email. **Mockk** is used instead of Mockito.
 
 ## Requirements
 
